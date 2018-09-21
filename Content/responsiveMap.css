@@ -1,0 +1,419 @@
+﻿/* Responsive css */
+
+@media screen and (max-width: 1024px) {
+    #mapLegend {
+        background: white;
+        color: black;
+        padding: 5px 6px 0 10px;
+        margin-left: 3px;
+        margin-top: -6px;
+        font-weight: bold;
+        border-radius: 4px;
+        text-align: left;
+    }
+    .mapLegend_span {
+        font-family: Open Sans, sans-serif;
+        font-size: 11px;
+        display: inline-block;
+    }
+    .mapLegend_checkbox {
+        vertical-align: top;
+        height: 11px;
+        width: 11px;
+        display: inline-block;
+    }
+
+    #infowindow {
+        text-align: left;
+        height: 341px;
+        position: relative;
+        width: 324px;
+    }
+
+    .weatherInfo {
+        width: 239px;
+        display: inline-block;
+        margin-top: 6px;
+        margin-left: 15px;
+    }
+
+    .viaferrataWindoeInfo {
+        width: 328px;
+        font-family: Open Sans,sans-serif;
+        display: inline-block;
+        color: black;
+        margin-top: 275px;
+        height: 187px;
+    }
+
+    #WeatherImage {
+        height: 200px;
+        width: 280px;
+        margin-top:-23px;
+    }
+
+    #WeatherImageInfo {
+        display: inline-block;
+        position: absolute;
+        font-size: 13px;
+        font-family: Open Sans,sans-serif;
+        color: black;
+        margin-top: -443px;
+    }
+}
+
+
+
+@media screen and (max-width: 960px) {
+}
+
+
+
+@media screen and (max-width: 768px) {
+
+    #mapLegend {
+        background: white;
+        color: black;
+        padding: 5px 6px 0 10px;
+        margin-left: 10px;
+        margin-top: -3px;
+        font-weight: bold;
+        border-radius: 4px;
+        text-align: left;
+        filter: alpha(opacity=80);
+    }
+
+    .mapLegend_span {
+        font-family: Open Sans, sans-serif;
+        font-size: 15px;
+        display: inline-block;
+    }
+
+    .mapLegend_checkbox {
+        vertical-align: top;
+        height: 15px;
+        width: 15px;
+        display: inline-block;
+    }
+
+    #infowindow {
+        text-align: left;
+        height: 309px;
+        position: relative;
+        width: 281px;
+    }
+
+    .iw-title {
+        font-size: 16px;
+        font-weight: bold
+    }
+
+    .td_BoldText {
+        font-size: 13px;
+        font-weight: bold
+    }
+
+    .td_NormalText {
+        font-size: 13px
+    }
+
+    .weatherInfo {
+        width: 195px;
+        display: inline-block;
+        margin-top: 6px;
+        margin-left: 15px;
+    }
+
+
+    .viaferrataWindoeInfo {
+        width: 328px;
+        font-family: Open Sans,sans-serif;
+        display: inline-block;
+        color: black;
+        margin-top: 252px;
+        height: 160px;
+    }
+
+    #WeatherImage {
+        height: 184px;
+        width: 280px;
+        margin-top: 24px;
+    }
+
+
+    #WeatherImageInfo {
+        display: inline-block;
+        position: absolute;
+        font-size: 13px;
+        font-family: Open Sans,sans-serif;
+        color: black;
+        margin-top: -443px;
+    }
+
+    .parkInfowindowInfo {
+        font-size: 13px;
+        width: 195px;
+        padding-right: 2px;
+    }
+
+}
+
+
+
+@media screen and (max-width: 480px) {
+    #mapLegend {
+        background: white;
+        color: black;
+        padding: 5px 6px 0 10px;
+        margin-left: 10px;
+        margin-top: -3px;
+        font-weight: bold;
+        border-radius: 4px;
+        text-align: left;
+        filter: alpha(opacity=80);
+    }
+    .mapLegend_span {
+        font-family: Open Sans, sans-serif;
+        font-size: 15px;
+        display: inline-block;
+    }
+    .mapLegend_checkbox {
+        vertical-align: top;
+        height: 15px;
+        width: 15px;
+        display: inline-block;
+    }
+
+   #infowindow {
+       text-align: left;
+       height: 309px;
+       position: relative;
+       width: 281px;
+   }
+    .iw-title {
+        font-size: 16px;
+        font-weight: bold
+    }
+
+    .td_BoldText {
+        font-size: 13px;
+        font-weight: bold
+    }
+
+    .td_NormalText {
+        font-size: 13px
+    }
+
+    .weatherInfo {
+        width: 195px;
+        display: inline-block;
+        margin-top: 6px;
+        margin-left: 15px;
+    }
+
+
+    .viaferrataWindoeInfo {
+        width: 328px;
+        font-family: Open Sans,sans-serif;
+        display: inline-block;
+        color: black;
+        margin-top: 252px;
+        height: 160px;
+    }
+
+    #WeatherImage {
+        height: 184px;
+        width: 280px;
+        margin-top: 24px;
+    }
+
+
+    #WeatherImageInfo {
+        display: inline-block;
+        position: absolute;
+        font-size: 13px;
+        font-family: Open Sans,sans-serif;
+        color: black;
+        margin-top: -443px;
+    }
+
+    .parkInfowindowInfo {
+        font-size: 13px;
+        width: 195px;
+        padding-right: 2px;
+    }
+}
+
+
+@media screen and (max-width: 360px) {
+    #mapLegend {
+        background: white;
+        color: black;
+        padding: 5px 6px 0 10px;
+        margin-left: 10px;
+        margin-top: -3px;
+        font-weight: bold;
+        border-radius: 4px;
+        text-align: left;
+        filter: alpha(opacity=80);
+    }
+    .mapLegend_span {
+        font-family: Open Sans, sans-serif;
+        font-size: 15px;
+        display: inline-block;
+    }
+    .mapLegend_checkbox {
+        vertical-align: top;
+        height: 15px;
+        width: 15px;
+        display: inline-block;
+    }
+
+    #infowindow {
+        text-align: left;
+        height: 309px;
+        position: relative;
+        width: 272px;
+    }
+
+    .iw-title {
+        font-size: 16px;
+        font-weight: bold
+    }
+
+
+    .td_BoldText {
+        font-size: 13px;
+        font-weight: bold
+    }
+
+    .td_NormalText {
+        font-size: 13px
+    }
+
+    .weatherInfo {
+        width: 195px;
+        display: inline-block;
+        margin-top: 6px;
+        margin-left: 15px;
+    }
+
+    .viaferrataWindoeInfo {
+        width: 328px;
+        font-family: Open Sans,sans-serif;
+        display: inline-block;
+        color: black;
+        margin-top: 252px;
+        height: 160px;
+    }
+
+    #WeatherImage {
+        height: 184px;
+        width: 280px;
+        margin-top: 24px;
+    }
+
+    #WeatherImageInfo {
+        display: inline-block;
+        position: absolute;
+        font-size: 13px;
+        font-family: Open Sans,sans-serif;
+        color: black;
+        margin-top: -443px;
+    }
+
+    .parkInfowindowInfo {
+        font-size: 13px;
+        width: 195px;
+        padding-right: 2px;
+    }
+}
+
+
+@media screen and (max-width: 320px) {
+    #mapLegend {
+        background: white;
+        color: black;
+        padding: 5px 6px 0 10px;
+        margin-left: 10px;
+        margin-top: -3px;
+        font-weight: bold;
+        border-radius: 4px;
+        text-align: left;
+        filter: alpha(opacity=80);
+    }
+    .mapLegend_span {
+        font-family: Open Sans, sans-serif;
+        font-size: 15px;
+        display: inline-block;
+    }
+    .mapLegend_checkbox {
+        vertical-align: top;
+        height: 15px;
+        width: 15px;
+        display: inline-block;
+    }
+
+    #infowindow {
+        text-align: left;
+        height: 309px;
+        position: relative;
+        width: 232px;
+    }
+
+    .iw-title {
+        font-size: 16px;
+        font-weight: bold
+    }
+
+
+    .td_BoldText {
+        font-size: 13px;
+        font-weight: bold
+    }
+
+    .td_NormalText {
+        font-size: 13px
+    }
+
+    .weatherInfo {
+        width: 159px;
+        display: inline-block;
+        margin-top: -38px;
+        margin-left: 77px;
+        vertical-align: top;
+    }
+
+    .viaferrataWindoeInfo {
+        width: 328px;
+        font-family: Open Sans,sans-serif;
+        display: inline-block;
+        color: black;
+        margin-top: 260px;
+        height: 166px;
+    }
+
+    #WeatherImage {
+        height: 184px;
+        width: 280px;
+    }
+
+    #WeatherImageInfo {
+        display: inline-block;
+        position: absolute;
+        font-size: 13px;
+        font-family: Open Sans,sans-serif;
+        color: black;
+        width: 260px;
+        margin-top: -456px;
+    }
+
+    .parkInfowindowInfo {
+        font-size: 13px;
+        width: 195px;
+        padding-right: 2px;
+    }
+}
+
+
+/* Responsive css */

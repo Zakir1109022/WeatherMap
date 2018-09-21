@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Map</title>
+    <link rel="stylesheet" href="./Content/Site.css">
+    <link rel="stylesheet" href="./Content/responsiveMap.css">
+    <link rel="stylesheet" href="./Content/bootstrap.css">
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Weather Map</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="#">Home</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="body-content">
+
+            <h2>MAP</h2>
+
+            <!-- Add Legend -->
+            <div id="mapContainer">
+                <div id="mapCanvas"></div>
+                <div id="mapLegend">
+                    <p class="mapLegend_span" style="">Zobrazit parkoviště u ferraty</p>
+                    <input class="mapLegend_checkbox" style="" type="checkbox" id="toggleParkvistaMarkers" onChange="toggleParkvistaMarker()">
+                </div>
+            </div>
+            
+            <!-- Add Google Maps -->
+            <div id="googleMap" class="text-center" style="height:1000px;width:100%;"></div>
+            
+            <script>
+            
+                // This example requires the Places library. Include the libraries=places
+                // parameter when you first load the API. For example:
+                // <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCB5L2shI6M7tBm8eKAqYE9L6qEspkPdIo&libraries=places">
+            
+                var Markers = [];
+                var ViafrrrataMarkers = [];
+                var ParkvistaMarkers = [];
+            
+                var map;
+                function initMap() {
+                    var uluru = { lat: 49.8175, lng: 15.4730 };
+                    map = new google.maps.Map(document.getElementById('googleMap'), {
+                        zoom: 8,
+                        center: uluru,
+                        mapTypeId: 'hybrid'
+                    });
+            
+            
+                    var marker;
+                    var contentString;
+                    var infoWindowArray = new Array();
+                    var viaFerrataImage = '';
+                    //var Markers = [];
+            
+                    //for weatherInfo
+                    $.get("https://www.googleapis.com/fusiontables/v2/query?sql=SELECT%20*%20FROM%201IMyrKrMg7PffQeesCxuw3Dp7MQYSgAa-BBAQ26pE&key=AIzaSyBELIfLecGMJgg7QWpjSOoNVJ6mBJCqJC8"
+                        , function (result, status, xhr) {
+            
+                            //var jsonResult = JSON.parse(result);
+            
+                            //iterate weatherInfo Data
+                            for (var i = 0; i < result["rows"].length; i++) {
+            
+                                var lat = parseFloat(result["rows"][i][16]);
+                                var lon = parseFloat(result["rows"][i][17]);
+                                var id = result["rows"][i][0];
+            
+            
+            
+                                uluru = { lat: lat, lng: lon };
+            
+                                contentString = '<div id="infowindow">' +
+                                    '<div class="iw-title">' +
+                                    result["rows"][i][1] +
+                                    '</div>' +
+                                    '<div><br>' +
+                                    '<div class="viaferrataWindoeInfo">' +
+                                    '<table rowspacing="0">';
+            
+                                contentString += result["rows"][i][2] !== ""
+                                    ? '<tr><td class="td_BoldText" style="">Lokalita: </td><td> </td><td class="td_NormalText" style="">' + result["rows"][i][2] + '</td></tr>'
+                                    : "";
+            
+                                contentString += result["rows"][i][5] !== ""
+                                    ? '<tr><td class="td_BoldText" >Typ: </td><td> </td><td class="td_NormalText">' + result["rows"][i][5] + '</td></tr>'
+                                    : "";
+            
+                                contentString += result["rows"][i][6] !== ""
+                                    ? '<tr><td class="td_BoldText">Obtížnost: </td><td> </td><td class="td_NormalText">' + result["rows"][i][6] + '</td></tr>'
+                                    : "";
+            
+                                contentString += result["rows"][i][7] !== ""
+                                    ? '<tr><td class="td_BoldText">Délka: </td><td> </td><td class="td_NormalText">' + result["rows"][i][7] + '</td></tr>'
+                                    : "";
+            
+                                contentString += result["rows"][i][8] !== ""
+                                    ? '<tr><td class="td_BoldText">Převýšení: </td><td> </td><td class="td_NormalText">' + result["rows"][i][8] + '</td></tr>'
+                                    : "";
+            
+                                contentString += result["rows"][i][9] !== ""
+                                    ? '<tr><td class="td_BoldText">Čas: </td><td> </td><td class="td_NormalText">' + result["rows"][i][9] + '</td></tr>'
+                                    : "";
+            
+                                contentString += result["rows"][i][10] !== "" && !isNaN(result["rows"][i][10])
+                                    ? '<tr><td class="td_BoldText">Početcest: </td><td> </td><td class="td_NormalText">' + result["rows"][i][10] + '</td></tr>'
+                                    : "";
+            
+                                contentString += result["rows"][i][11] !== ""
+                                    ? '<tr><td class="td_BoldText">Půjčovna: </td><td> </td><td class="td_NormalText">' + result["rows"][i][11] + '</td></tr>'
+                                    : "";
+            
+                                contentString += result["rows"][i][12] !== ""
+                                    ? '<tr><td class="td_BoldText">Cena: </td><td> </td><td class="td_NormalText">' + result["rows"][i][12] + '</td></tr>'
+                                    : "";
+            
+                                contentString += result["rows"][i][13] !== ""
+                                    ? '<tr><td class="td_BoldText">Popis: </td><td> </td><td class="td_NormalText">' + result["rows"][i][13] + '</td></tr>'
+                                    : "";
+            
+                                //for Photo
+                                viaFerrataImage = result["rows"][i][18];
+            
+                                contentString += '</table></div>';
+            
+                                //....................................................................................................................................................
+            
+            
+                                //for pocasi
+                                $.ajax({
+                                    url: "https://www.googleapis.com/fusiontables/v2/query?sql=SELECT%20*%20FROM%201j0OY_aiQZBW-3R7jFt36-cWka9YHmh9RE1sUdHsN%20WHERE%20ID=" +
+                                    id + "%20&key=AIzaSyBELIfLecGMJgg7QWpjSOoNVJ6mBJCqJC8",
+                                    type: 'GET',
+                                    async: false,
+                                    success: function (data) {
+                                        // alert(JSON.stringify(data));
+            
+                                        //for icon
+                                        var iconUrl = '';
+                                        $.ajax({
+                                            url: "https://www.googleapis.com/fusiontables/v2/query?sql=SELECT%20*%20FROM%201FkKomHckDCyRJdjaxEN-6mjSFkm8fOfLpQc_p9F3%20WHERE%20id=" + data["rows"][0][1] + "%20&key=AIzaSyBELIfLecGMJgg7QWpjSOoNVJ6mBJCqJC8",
+                                            type: 'GET',
+                                            async: false,
+                                            success: function (data) {
+            
+                                                iconUrl = data["rows"][0][2];
+                                            }
+            
+                                        });
+            
+            
+                                        var pocasiString =
+                                            '<div id="WeatherImageInfo">' +
+                                            '<img id="WeatherImage"  src="' + viaFerrataImage + '" alt="' + result["rows"][i][2]+'" >' +
+                                            '<div class="weatherIcon"><p>';
+            
+                                        //for Icon set 2
+                                        var iconUrl1 = '';
+                                        var iconUrl2 = '';
+                                        $.ajax({
+                                            url: "https://www.googleapis.com/fusiontables/v2/query?sql=SELECT%20*%20FROM%201eRJ7aZd0Muvfv_D0lGElw-17h50ojUqAcqokVrBU%20&key=AIzaSyBELIfLecGMJgg7QWpjSOoNVJ6mBJCqJC8",
+                                            type: 'GET',
+                                            async: false,
+                                            success: function (data) {
+                                                iconUrl1 = data["rows"][0][1];
+                                                iconUrl2 = data["rows"][1][1];
+                                            }
+            
+                                        });
+            
+                                        pocasiString += data["rows"][0][8] === "1"
+                                            ? '<img  src="' + iconUrl1 + '" alt="Climbing icon" height="35" width="35">' : '<img  src="' + iconUrl2 + '" alt="Climbing icon" height="35" width="35">';
+            
+                                        pocasiString += '<img  src="' +
+                                            iconUrl +
+                                            '" height="35" width="35"></p></div>' +
+                                            '<div class="weatherInfo" style=""><p><lable>';
+            
+                                        pocasiString += isNaN(result["rows"][0][7])
+                                            ? data["rows"][0][7] + "&deg;C,</lable><lable>" : "";
+            
+                                        pocasiString += data["rows"][0][2] + '</lable><br><lable>Vitr: ';
+            
+                                        pocasiString += isNaN(result["rows"][0][5])
+                                            ? parseFloat(data["rows"][0][5]).toFixed(2) : "";
+            
+                                        pocasiString += ' km/h</lable><br><lable>Úhrn srážek za 24 h: ';
+                                        pocasiString += isNaN(result["rows"][0][9])
+                                            ? data["rows"][0][9] : "";
+            
+                                        pocasiString += '</lable></p>' + '</div></div>' + '</div>';
+            
+            
+                                        contentString = contentString + pocasiString;
+            
+                                    }
+                                });
+            
+                                //................................................................................................................................................
+            
+            
+                                //show content to window
+                                var infowindow = new google.maps.InfoWindow({
+                                    content: contentString
+                                });
+            
+                                infoWindowArray[i + 1] = infowindow;
+            
+                                var icon = {
+                                    url: 'http://horezdar.cz/wp-content/uploads/2018/04/via-ferrata-pin.png', // url
+                                    scaledSize: new google.maps.Size(40, 60) // scaled size
+            
+                                };
+            
+                                marker = new google.maps.Marker({
+                                    position: uluru,
+                                    map: map,
+                                    icon: icon,
+                                    title: (i + 1) + " {" + result["rows"][i][1] + "}",
+                                    infowindow: infowindow
+            
+                                });
+            
+                                //push marker for show or hide window
+                                Markers.push(marker);
+            
+                                //for show & hide all viferrata marker
+                                ViafrrrataMarkers.push(marker);
+            
+                                google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                                    return function () {
+                                        //hide all info window
+                                        hideAllInfoWindows(map);
+                                        //center map after click marker
+                                        map.setCenter(marker.getPosition());
+                                        infoWindowArray[this.getTitle().split(" ")[0]].open(map, marker);
+                                    }
+                                })(marker, i));
+            
+                            }
+            
+                            //hide all infowindow
+                            function hideAllInfoWindows(map) {
+                                Markers.forEach(function (marker) {
+                                    marker.infowindow.close(map, marker);
+                                });
+                            }
+                        }
+            
+                    ).fail(function (xhr, status, error) {
+                        alert("Result: " + status + " " + error + " " +
+                            xhr.status + " " + xhr.statusText);
+                    });
+            
+            
+                    //.................................................................................................
+            
+                    //for Parkvista
+                    var infoWindowArray2 = new Array();
+                    $.get("https://www.googleapis.com/fusiontables/v2/query?sql=SELECT%20*%20FROM%201EwxYIQn1vLSnDtMAlBsMFKBImT8TrrHTXp8Fum1e&key=AIzaSyBELIfLecGMJgg7QWpjSOoNVJ6mBJCqJC8"
+                        , function (result, status, xhr) {
+            
+                            //var jsonResult = JSON.parse(result);
+            
+                            //iterate weatherInfo Data
+                            for (var i = 0; i < result["rows"].length; i++) {
+                                var lat = parseFloat(result["rows"][i][3]);
+                                var lon = parseFloat(result["rows"][i][4]);
+            
+                                uluru = { lat: lat, lng: lon };
+                                var contentString = '<div class="parkInfowindow">' +
+                                    '<div class="iw-title">' + result["rows"][i][1] + '</div>' +
+                                    '<div class="iw-content">' +
+                                    '<div class="parkInfowindowInfo">' +
+                                    '<lable style="font-weight:bold;">Název:&nbsp&nbsp</lable><lable>' +
+                                    result["rows"][i][2] +
+                                    '</lable>' +
+                                    '</div>' +
+                                    '</div>';
+            
+            
+            
+                                //show content to window
+                                var infowindow = new google.maps.InfoWindow({
+                                    content: contentString
+                                });
+            
+                                infoWindowArray2[i + 1] = infowindow;
+            
+                                var icon = {
+                                    url: 'http://horezdar.cz/wp-content/uploads/2018/04/carpark-pin.png', // url
+                                    scaledSize: new google.maps.Size(40, 60) // scaled size
+            
+                                };
+            
+                                marker = new google.maps.Marker({
+                                    position: uluru,
+                                    map: map,
+                                    icon: icon,
+                                    title: (i + 1) + " {" + result["rows"][i][2] + "}",
+                                    infowindow: infowindow
+                                });
+            
+                                //push Marker for show or hide window
+                                Markers.push(marker);
+            
+                                //for show & hide all parkvista marker
+                                ParkvistaMarkers.push(marker);
+            
+                                google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                                    return function () {
+                                        //hide all info window
+                                        hideAllInfoWindows(map);
+                                        //center map after click marker
+                                        map.setCenter(marker.getPosition());
+                                        infoWindowArray2[this.getTitle().split(" ")[0]].open(map, marker);
+                                    }
+                                })(marker, i));
+            
+            
+                            }
+            
+            
+                            //initially hide all parkavista marker
+                            for (var i = 0; i < ParkvistaMarkers.length; i++) {
+                                ParkvistaMarkers[i].setMap(null);
+                            }
+            
+                            //hide all infowindow
+                            function hideAllInfoWindows(map) {
+                                Markers.forEach(function (marker) {
+                                    marker.infowindow.close(map, marker);
+                                });
+                            }
+                        }
+            
+                    ).fail(function (xhr, status, error) {
+                        alert("Result: " + status + " " + error + " " +
+                            xhr.status + " " + xhr.statusText);
+                    });
+            
+            
+            
+                    /* Adding Map Legends */
+                    var legend = document.getElementById('mapLegend');
+                    /* Push Legend to Right Top */
+                    map.controls[google.maps.ControlPosition.LEFT_TOP].push(legend);
+            
+            
+            
+                   
+                }
+            
+            
+            
+            
+                //show or hide parkvista marker
+                function toggleParkvistaMarker() {
+                    var show;
+                    if (document.getElementById("toggleParkvistaMarkers").checked)
+                        show = map;
+                    else
+                        show = null;
+                    for (var i = 0; i < ParkvistaMarkers.length; i++) {
+                        ParkvistaMarkers[i].setMap(show);
+                    }
+                }
+            
+            </script>
+
+            <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCB5L2shI6M7tBm8eKAqYE9L6qEspkPdIo&libraries=places&callback=initMap"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,128 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+
+td {
+    vertical-align: top;
+}
+
+
+#mapLegend {
+    background: white;
+    color: black;
+    padding: 5px 6px 0 10px;
+    margin-left: 10px;
+    margin-top: -3px;
+    font-weight: bold;
+    border-radius: 4px;
+    text-align: left;
+    filter: alpha(opacity=80);
+}
+.mapLegend_span {
+    font-family: Open Sans, sans-serif;
+    font-size: 15px;
+    display: inline-block;
+}
+.mapLegend_checkbox {
+    vertical-align: top;
+    height: 15px;
+    width: 15px;
+    display: inline-block;
+}
+
+#infowindow {
+    text-align: left;
+    height: 341px;
+    position: relative;
+    width: 619px;
+}
+
+.iw-title {
+    font-size: 25px;
+    font-weight: bold
+}
+
+.viaferrataWindoeInfo {
+    width: 328px;
+    font-family: Open Sans,sans-serif;
+    display: inline-block;
+    color: black;
+}
+
+.td_BoldText {
+    font-size: 15px;
+    font-weight: bold
+}
+
+.td_NormalText {
+    font-size: 15px
+}
+
+#WeatherImageInfo {
+    display: inline-block;
+    position: absolute;
+    font-size: 15px;
+    font-family: Open Sans,sans-serif;
+    color: black;
+}
+
+#WeatherImage {
+    height :200px;
+    width:280px;
+}
+
+.weatherIcon {
+    display: inline-block;
+    vertical-align: text-bottom;
+}
+
+.weatherInfo {
+    width: 196px;
+    display: inline-block;
+    margin-top: 6px;
+    margin-left: 15px
+}
+
+.parkInfowindow {
+    text-align: left;
+    font-family: Open Sans,sans-serif;
+}
+
+.parkInfowindowInfo {
+    font-size: 15px;
+    width: 400px;
+    padding-right: 2px;
+}
+
+
+
+
+
+
+
+
+
+
